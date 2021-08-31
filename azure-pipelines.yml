@@ -10,6 +10,5 @@ pool:
   vmImage: ubuntu-latest
 
 - task: CMake@1
-  environment: test
   inputs:
     cmakeArgs: 
