@@ -21,7 +21,7 @@ steps:
   inputs:
     workingDirectory: $(Agent.BuildDirectory)
     targetType: 'inline'
-    script: 'cmake --build .'
+    script: 'make -j4'
 
 - task: Bash@3
   displayName: 'Run tests'
