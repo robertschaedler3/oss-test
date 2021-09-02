@@ -14,7 +14,7 @@ steps:
 - task: Bash@3
   displayName: 'Install build prereqs'
   inputs: 
-    workingDirectory: $Build.SourcesDirectory)
+    workingDirectory: $(Build.SourcesDirectory)
     targetType: 'inline'
     script: 'apt-get -y install googletest'
 
