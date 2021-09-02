@@ -5,6 +5,7 @@ project(oss)
 # GoogleTest requires at least C++11
 set(CMAKE_CXX_STANDARD 11)
 
+include(CTest)
 include(FetchContent)
 FetchContent_Declare(
   googletest
