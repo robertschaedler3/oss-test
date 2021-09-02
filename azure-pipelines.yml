@@ -11,5 +11,26 @@ pool:
   
 steps:
 - task: CMake@1
+  displayName: 'Generate Makefile'
   inputs:
-    cmakeArgs: 
+    workingDirectory: $(Build.SourcesDirectory)
+    cmakeArgs: -B$(Agent.BuildDirectory)
+    
+- task: Bash@3
+  displayName: 'Build'
+  inputs:
+    workingDirectory: $(Agent.BuildDirectory)
+    targetType: 'inline'
+    script: 'make -j4'
+
+- task: Bash@3
+  displayName: 'Run tests'
+  continueOnError: true
+  inputs:
+    workingDirectory: $(Agent.BuildDirectory)
+    targetType: 'inline'
+    script: 'ctest -T test --verbose > test_output.log'
+
+- publish: $(Agent.BuildDirectory)/test_output.log
+  displayName: 'Publish tests logs'
+  artifact: Test Logs
