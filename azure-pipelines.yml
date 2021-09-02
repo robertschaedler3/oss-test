@@ -14,7 +14,7 @@ steps:
   displayName: 'Generate Makefile'
   inputs:
     workingDirectory: $(Build.SourcesDirectory)
-    cmakeArgs: 
+    cmakeArgs: -B$(Agent.BuildDirectory)
     
 - task: Bash@3
   displayName: 'Build'
