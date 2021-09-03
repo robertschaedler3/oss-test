@@ -11,7 +11,7 @@ class Tests(unittest.TestCase):
 
     def test_fail(self):
         expected = 3
-        actual = add(1, 1)
+        actual = add(1, 2)
         self.assertEqual(expected, actual)
 
 
