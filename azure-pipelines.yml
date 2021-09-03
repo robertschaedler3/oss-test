@@ -7,30 +7,36 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-20.04
+ 
+ 
+jobs:
+- job: Build
+  displayName: "Build & test"
   
-steps:
-- task: CMake@1
-  displayName: 'Generate Makefile'
-  inputs:
-    workingDirectory: $(Build.SourcesDirectory)
-    cmakeArgs: -B$(Agent.BuildDirectory)
-    
-- task: Bash@3
-  displayName: 'Build'
-  inputs:
-    workingDirectory: $(Agent.BuildDirectory)
-    targetType: 'inline'
-    script: 'make -j4'
+  steps:
+  
+  - task: CMake@1
+    displayName: 'Generate Makefile'
+    inputs:
+      workingDirectory: $(Build.SourcesDirectory)
+      cmakeArgs: -B$(Agent.BuildDirectory)
 
-- task: Bash@3
-  displayName: 'Run tests'
-  continueOnError: true
-  inputs:
-    workingDirectory: $(Agent.BuildDirectory)
-    targetType: 'inline'
-    script: 'ctest -T test --verbose > test_output.log'
+  - task: Bash@3
+    displayName: 'Build'
+    inputs:
+      workingDirectory: $(Agent.BuildDirectory)
+      targetType: 'inline'
+      script: 'make -j4'
 
-- publish: $(Agent.BuildDirectory)/test_output.log
-  displayName: 'Publish tests logs'
-  artifact: Test Logs
+  - task: Bash@3
+    displayName: 'Run tests'
+    continueOnError: true
+    inputs:
+      workingDirectory: $(Agent.BuildDirectory)
+      targetType: 'inline'
+      script: './tests > test_output.log'
+
+  - publish: $(Agent.BuildDirectory)/test_output.log
+    displayName: 'Publish tests logs'
+    artifact: Test Logs
