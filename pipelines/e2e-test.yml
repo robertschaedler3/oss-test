@@ -1,0 +1,15 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-20.04
+ 
+ 
+jobs:
+- job: E2E
+  displayName: "E2E"
+  
+  steps:
+  
+  - script: echo 'This was triggered by GitHub Actions' 
+    displayName: "Mock E2E Testing"
