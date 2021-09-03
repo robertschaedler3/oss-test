@@ -35,7 +35,7 @@ jobs:
     inputs:
       workingDirectory: $(Agent.BuildDirectory)
       targetType: 'inline'
-      script: 'ctest -T test --verbose > test_output.log'
+      script: './tests > test_output.log'
 
   - publish: $(Agent.BuildDirectory)/test_output.log
     displayName: 'Publish tests logs'
