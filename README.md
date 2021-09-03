@@ -1,4 +1,4 @@
 # oss-test
 
 
-[![Build Status](https://trendease.visualstudio.com/oss-test/_apis/build/status/robertschaedler3.oss-test?branchName=main)](https://trendease.visualstudio.com/oss-test/_build/latest?definitionId=6&branchName=main)
+[![Build Status](https://dev.azure.com/robertschaedler/oss-test/_apis/build/status/robertschaedler3.oss-test?branchName=main)](https://dev.azure.com/robertschaedler/oss-test/_build/latest?definitionId=5&branchName=main)
