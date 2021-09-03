@@ -14,6 +14,11 @@ class Tests(unittest.TestCase):
         actual = add(1, 2)
         self.assertEqual(expected, actual)
 
+    def test_fail_2(self):
+        expected = 4
+        actual = add(1, 2)
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
