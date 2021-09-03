@@ -20,5 +20,5 @@ jobs:
           uses: Azure/pipelines@v1
           with:
             azure-devops-project-url: https://dev.azure.com/robertschaedler/oss-test
-            azure-pipeline-name: 'E2E Mock Pipeline'
+            azure-pipeline-name: 'Mock E2E'
             azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
