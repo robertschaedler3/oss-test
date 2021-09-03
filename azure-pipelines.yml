@@ -16,27 +16,16 @@ jobs:
   
   steps:
   
-  - task: CMake@1
-    displayName: 'Generate Makefile'
+  - script: python -m pip install --upgrade pip setuptools wheel 
+    displayName: "Install tools"
+  
+  - script: |
+      python -m pip install pytest pytest-azurepipelines
+      pytest --unitxml=junit/test-results.xml
+    displayName: 'pytest'
+  
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
     inputs:
-      workingDirectory: $(Build.SourcesDirectory)
-      cmakeArgs: -B$(Agent.BuildDirectory)
-
-  - task: Bash@3
-    displayName: 'Build'
-    inputs:
-      workingDirectory: $(Agent.BuildDirectory)
-      targetType: 'inline'
-      script: 'make -j4'
-
-  - task: Bash@3
-    displayName: 'Run tests'
-    continueOnError: true
-    inputs:
-      workingDirectory: $(Agent.BuildDirectory)
-      targetType: 'inline'
-      script: './tests > test_output.log'
-
-  - publish: $(Agent.BuildDirectory)/test_output.log
-    displayName: 'Publish tests logs'
-    artifact: Test Logs
+      testResultsFiles: '**/test-*.xml'
+      testRunTitle: 'Publish test results'
