@@ -16,5 +16,6 @@ class Tests(unittest.TestCase):
         self.assertEqual(expected, actual)
 
 
+# Main
 if __name__ == '__main__':
     unittest.main()
